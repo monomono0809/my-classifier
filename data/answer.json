@@ -1,0 +1,242 @@
+[
+  {
+    "id": "Q001",
+    "text": "지금 업체에 선금 입금 마감인데 지원금 카드 한도가 막혔대요. 오늘 안에 풀어주세요.",
+    "category": "사업비·정산",
+    "urgency": "높음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q002",
+    "text": "성능 검증 결과 그래프가 기대와 달라서 기술 자문을 받고 싶어요. 시험은 계속 돌리고 있어요.",
+    "category": "기술·제품화",
+    "urgency": "보통",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q003",
+    "text": "온라인 판매 입점 지원이 있는지 알려주세요.",
+    "category": "판로·투자",
+    "urgency": "낮음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q004",
+    "text": "시험성적서 발급이 늦어져서 오늘 납품 계약서에 첨부를 못 하고 있습니다.",
+    "category": "기술·제품화",
+    "urgency": "높음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q005",
+    "text": "투자사 대상 IR 자료 검토를 받고싶은데 언제 가능할까요? 다음 주 발표라 아주 급한 건 아니에요.",
+    "category": "판로·투자",
+    "urgency": "보통",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q006",
+    "text": "멘토 프로필 보고 직접 고를 수 있어?",
+    "category": "교육·멘토링",
+    "urgency": "낮음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q007",
+    "text": "교육 출석이 80프로 미만이면 어떻게 되나요? 지금 한 번 빠졌어요.",
+    "category": "교육·멘토링",
+    "urgency": "보통",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q008",
+    "text": "오늘 마지막 필수 강의에 입장 코드가 틀렸다고 나와서 못 들어가고 있어요. 수료가 걸려 있어요.",
+    "category": "교육·멘토링",
+    "urgency": "높음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q009",
+    "text": "구매상담회에서 받은 견적 요청에 어떻게 답해야 할지 몰라서요. 회신 기한은 며칠 남았어요.",
+    "category": "판로·투자",
+    "urgency": "보통",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q010",
+    "text": "상담 예약 시간을 잘못 눌러서 바꾸고 싶은데 변경이 안 돼요. 예약일은 이틀 뒤에요.",
+    "category": "교육·멘토링",
+    "urgency": "보통",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q011",
+    "text": "서명한 협약서를 우편으로 내는지 온라인으로 내는지 모르겠어요. 체결 기한 안에는 낼 수 있어요.",
+    "category": "신청·협약",
+    "urgency": "낮음",
+    "label_by": "human",
+    "note": "판단이 갈린다"
+  },
+  {
+    "id": "Q012",
+    "text": "운영기관 대표번호가 바뀌었다고 들었는데 새 번호 안내 부탁드려요.",
+    "category": "기타",
+    "urgency": "낮음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q013",
+    "text": "사업 만족도 조사는 필수 참여인가요?",
+    "category": "기타",
+    "urgency": "낮음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q014",
+    "text": "하반기 창업 교육 신청은 언제부터 가능한가요?",
+    "category": "교육·멘토링",
+    "urgency": "낮음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q015",
+    "text": "올해 사업 신청 공고는 언제쯤 나오나요?",
+    "category": "신청·협약",
+    "urgency": "낮음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q016",
+    "text": "시제품 3D 출력 장비를 공동 이용할 수 있는 공간이 있는지 궁금해요.",
+    "category": "기술·제품화",
+    "urgency": "낮음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q017",
+    "text": "신청할 때 재직증명서는 대표 본인 것도 내야 하는지 궁금합니다",
+    "category": "신청·협약",
+    "urgency": "낮음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q018",
+    "text": "출장비 증빙으로 항공권 영수증만 내면 되나요? 다른 서류도 필요한지 알려주세요.",
+    "category": "사업비·정산",
+    "urgency": "낮음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q019",
+    "text": "협약 변경을 하면서 사업비 총액도 같이 조정해 달라고 요청해야 하나요? 변경 신청서는 일단 작성했어요.",
+    "category": "사업비·정산",
+    "urgency": "보통",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q020",
+    "text": "서류심사 보완요청 기한이 오늘인데 첨부 양식을 열 수가 없어서 제출을 못하고 있어요.",
+    "category": "신청·협약",
+    "urgency": "높음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q021",
+    "text": "하반기 박람회 참가기업 모집이 따로 있나요?",
+    "category": "판로·투자",
+    "urgency": "낮음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q022",
+    "text": "오늘 입주사 행사에 제 참가 등록이 중복 처리돼서 입장이 막혔어요.",
+    "category": "기타",
+    "urgency": "높음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q023",
+    "text": "재료비 항목에서 인건비 항목으로 200만원 옮기고 싶은데 승인까지 얼마나 걸리나요? 이번 달 안엔 알고 싶어요.",
+    "category": "사업비·정산",
+    "urgency": "보통",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q024",
+    "text": "사업비 사용내역서 양식이 두 가지라서 뭘 써야 하는지 모르겠어요. 지금 작성 중이에요.",
+    "category": "사업비·정산",
+    "urgency": "보통",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q025",
+    "text": "협약서에 적힌 사업 기간이 신청서와 달라요. 정정해야 하는지 확인 부탁합니다.",
+    "category": "신청·협약",
+    "urgency": "보통",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q026",
+    "text": "인증 심사 서류에 쓸 시험 규격 번호를 어디서 확인하는지 알려주세요.",
+    "category": "기술·제품화",
+    "urgency": "보통",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q027",
+    "text": "전시 부스 설치 업체가 연락이 끊겨서 행사가 한 시간 뒤인데 부스가 비어 있어요.",
+    "category": "판로·투자",
+    "urgency": "높음",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q028",
+    "text": "특허 등록 후 유지비용 지원이 있나요?",
+    "category": "사업비·정산",
+    "urgency": "낮음",
+    "label_by": "human",
+    "note": "판단이 갈린다"
+  },
+  {
+    "id": "Q029",
+    "text": "공용 회의실 예약이 중복돼서 사용 시간 조정이 필요해요. 내일 오전 회의지만 다른 방에서 할 수는 있어요.",
+    "category": "기타",
+    "urgency": "보통",
+    "label_by": "human",
+    "note": ""
+  },
+  {
+    "id": "Q030",
+    "text": "제출한 개인정보 수집 동의서를 철회하고 싶어요.",
+    "category": "기타",
+    "urgency": "보통",
+    "label_by": "human",
+    "note": ""
+  }
+]

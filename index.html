@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>창업지원 문의 데스크</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <div>
+        <h1>창업지원 문의 데스크</h1>
+        <p class="sub">참여기업의 문의 한 줄을 칸과 긴급도로 나눕니다.</p>
+      </div>
+      <span class="mode-badge" title="Gemini가 분류하고, AI가 실패하면 낱말 규칙으로 분류합니다.">AI 분류 · 실패 시 규칙</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="load-error" class="notice error" role="alert" hidden></div>
+
+    <div class="tabs" role="tablist" aria-label="화면 선택">
+      <button id="tab-classify" class="tab" role="tab" aria-selected="true" aria-controls="panel-classify">분류</button>
+      <button id="tab-grade" class="tab" role="tab" aria-selected="false" aria-controls="panel-grade" tabindex="-1">채점</button>
+    </div>
+
+    <!-- ① 분류 -->
+    <section id="panel-classify" class="panel" role="tabpanel" aria-labelledby="tab-classify">
+      <div class="card">
+        <label for="q" class="ask">어떤 문의가 들어왔나요?</label>
+        <div id="examples" class="chips" aria-label="예시 문의"></div>
+        <form id="form" autocomplete="off">
+          <div class="row">
+            <input id="q" name="q" type="text" autocomplete="off" spellcheck="false"
+                   placeholder="문의 한 줄을 입력하세요" aria-describedby="hint">
+            <button id="go" type="submit" class="btn primary">문의 분류하기</button>
+          </div>
+          <p id="hint" class="hint" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div id="result" hidden>
+        <div class="arrow" aria-hidden="true">↓</div>
+        <div class="card reveal">
+          <h2 class="card-title">가린 문장</h2>
+          <p id="masked" class="masked"></p>
+        </div>
+        <div class="arrow" aria-hidden="true">↓</div>
+        <div class="card reveal" id="result-card">
+          <h2 class="card-title">분류 결과</h2>
+          <p id="r-src" class="src-tag" role="status" aria-live="polite"></p>
+          <div class="result-grid">
+            <div>
+              <div class="mini-label">칸</div>
+              <span id="r-cat" class="badge"></span>
+            </div>
+            <div>
+              <div class="mini-label">긴급도</div>
+              <span id="r-urg" class="urg"></span>
+            </div>
+          </div>
+          <p class="mini-label why-label">이유</p>
+          <p id="r-why" class="why"></p>
+        </div>
+      </div>
+
+      <p class="note" id="mask-scope"></p>
+
+      <details class="card basis" id="basis">
+        <summary>어떤 기준으로 나누나요?</summary>
+        <div id="basis-body"></div>
+      </details>
+    </section>
+
+    <!-- ② 채점 -->
+    <section id="panel-grade" class="panel" role="tabpanel" aria-labelledby="tab-grade" hidden>
+      <div class="card">
+        <p class="grade-intro">정답 30개로 채점합니다. 단추를 누를 때 정답 파일을 불러옵니다.</p>
+        <button id="grade-btn" type="button" class="btn primary">규칙으로 채점</button>
+        <p id="grade-status" class="hint" role="status" aria-live="polite">아직 채점하지 않았어요.</p>
+      </div>
+
+      <div class="card">
+        <p class="grade-intro">AI(Gemini)로 채점합니다. 가린 문장을 10개씩 세 번 보내고, 같은 문장을 규칙으로도 채점해 나란히 보여 줍니다.</p>
+        <div class="btn-row">
+          <button id="ai-btn" type="button" class="btn primary">AI로 채점</button>
+          <button id="ai-dl" type="button" class="btn ghost" disabled>AI 채점 결과 내려받기</button>
+        </div>
+        <p id="ai-status" class="hint" role="status" aria-live="polite">아직 AI로 채점하지 않았어요.</p>
+      </div>
+
+      <div class="card" id="ai-card" hidden>
+        <h2 class="card-title">규칙 · AI 나란히 보기</h2>
+        <table class="cmp">
+          <caption class="sr-only">규칙과 AI 채점 결과 비교</caption>
+          <thead><tr><th scope="col">항목</th><th scope="col">규칙</th><th scope="col">AI</th></tr></thead>
+          <tbody id="cmp-body"></tbody>
+        </table>
+        <p id="ai-fail" class="hint warn" hidden></p>
+        <dl class="meta" id="ai-meta"></dl>
+      </div>
+
+      <div class="score-grid" id="scores">
+        <div class="card score">
+          <div class="mini-label">칸 정확도</div>
+          <div class="score-main" id="s-cat">–</div>
+          <div class="score-sub" id="s-cat-n"></div>
+        </div>
+        <div class="card score">
+          <div class="mini-label">긴급도 정확도</div>
+          <div class="score-main" id="s-urg">–</div>
+          <div class="score-sub" id="s-urg-n"></div>
+        </div>
+        <div class="card score">
+          <div class="mini-label">둘 다 맞은 수</div>
+          <div class="score-main" id="s-both">–</div>
+          <div class="score-sub" id="s-both-n"></div>
+        </div>
+      </div>
+
+      <div class="card" id="wrong-card" hidden>
+        <h2 class="card-title">틀린 문장</h2>
+        <p id="wrong-empty" class="hint" hidden>틀린 문장이 없어요.</p>
+        <ul id="wrong" class="wrong-list"></ul>
+      </div>
+
+      <div class="card" id="meta-card" hidden>
+        <h2 class="card-title">채점 조건</h2>
+        <dl class="meta" id="meta"></dl>
+      </div>
+    </section>
+  </main>
+
+  <script src="mask.js"></script>
+  <script src="rules.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
