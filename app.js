@@ -6,8 +6,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var state = { criteria: null, keywords: null, practice: null };
 
-  var URG_CLASS = { 0: "u-high", 1: "u-mid", 2: "u-low" };
-  var URG_MARK = { 0: "▲ ", 1: "◆ ", 2: "● " };
+    var URG_MARK = { 0: "▲ ", 1: "◆ ", 2: "● " };
 
   /* ---------- 파일 읽기 ---------- */
   function loadJson(path) {
@@ -50,7 +49,8 @@
 
   function setUrg(el, name) {
     var i = urgIndex(name);
-    el.className = "urg " + (URG_CLASS[i] || "");
+    el.className = "pill";
+    el.setAttribute("data-level", i);
     el.textContent = (URG_MARK[i] || "") + name;
   }
 
@@ -139,7 +139,8 @@
       goBtn.disabled = true;
       $("masked").textContent = r.masked;
       $("r-cat").textContent = "–";
-      $("r-urg").className = "urg";
+      $("r-urg").className = "pill";
+      $("r-urg").removeAttribute("data-level");
       $("r-urg").textContent = "–";
       $("r-why").textContent = "";
       $("r-src").className = "src-tag";
@@ -200,16 +201,44 @@
     pickExamples().forEach(function (p) {
       var b = document.createElement("button");
       b.type = "button";
-      b.className = "chip";
+      b.className = "example";
       b.textContent = p.text;
-      b.addEventListener("click", function () {
-        $("q").value = p.text;
-        $("hint").textContent = "";
-        $("hint").className = "hint";
-        $("q").focus();
-      });
+      b.addEventListener("click", function () { fillInput(p.text); });
       wrap.appendChild(b);
     });
+
+    // 🎲 예시 문장 넣기: 누를 때마다 연습 문장 하나를 입력창에 채운다 (분류는 하지 않는다)
+    $("btn-sample").addEventListener("click", function () {
+      var list = state.practice.filter(function (p) { return p.text && p.text.length <= 70; });
+      var cur = $("q").value;
+      var pick;
+      do { pick = list[Math.floor(Math.random() * list.length)]; } while (list.length > 1 && pick.text === cur);
+      fillInput(pick.text);
+    });
+  }
+
+  function fillInput(text) {
+    $("q").value = text;
+    $("hint").textContent = "";
+    $("hint").className = "hint";
+    $("q").focus();
+  }
+
+  // 머리말·안내 상자의 칸/긴급도 꼬리표는 criteria.json에서 만든다
+  function renderIntro() {
+    var c = state.criteria;
+    $("sub").textContent = c.owner + " · version " + c.version;
+    function fill(id, names) {
+      var ul = $(id);
+      ul.textContent = "";
+      names.forEach(function (n) {
+        var li = document.createElement("li");
+        li.textContent = n;
+        ul.appendChild(li);
+      });
+    }
+    fill("tags-cat", c.categories.slice().sort(function (a, b) { return a.order - b.order; }).map(function (x) { return x.name; }));
+    fill("tags-urg", c.urgency.map(function (u) { return u.name; }));
   }
 
   function renderBasis() {
@@ -218,49 +247,33 @@
     var byId = {};
     state.practice.forEach(function (p) { byId[p.id] = p; });
 
-    function add(tag, text, cls) {
-      var el = document.createElement(tag);
-      el.textContent = text;
-      if (cls) el.className = cls;
-      body.appendChild(el);
-      return el;
+    function el(tag, text, cls) {
+      var e = document.createElement(tag);
+      if (text != null) e.textContent = text;
+      if (cls) e.className = cls;
+      return e;
     }
 
-    function block(title, definition, def) {
-      var div = document.createElement("div");
-      div.className = "cat-block";
-      var h = document.createElement("h3");
-      h.textContent = title;
-      div.appendChild(h);
-      if (definition) {
-        var p = document.createElement("p");
-        p.textContent = definition;
-        div.appendChild(p);
-      }
+    function row(tagText, level, definition, def) {
+      var div = el("div", null, "lg-row");
+      var head = el("div", null, "lg-head");
+      var tag = el("span", tagText, "lg-tag");
+      if (level != null) tag.setAttribute("data-level", level);
+      head.appendChild(tag);
+      head.appendChild(el("span", definition, "lg-desc"));
+      div.appendChild(head);
       if (def && def.keywords && def.keywords.length) {
-        var kws = document.createElement("p");
-        def.keywords.forEach(function (k) {
-          var s = document.createElement("span");
-          s.className = "kw";
-          s.textContent = k;
-          kws.appendChild(s);
-        });
+        var kws = el("p");
+        def.keywords.forEach(function (k) { kws.appendChild(el("span", k, "kw")); });
         div.appendChild(kws);
       }
-      if (def && def.note) {
-        var n = document.createElement("p");
-        n.textContent = def.note;
-        div.appendChild(n);
-      }
+      if (def && def.note) div.appendChild(el("p", def.note));
       if (def && def.examples && def.examples.length) {
-        var ul = document.createElement("ul");
-        ul.className = "src";
+        var ul = el("ul", null, "src");
         def.examples.forEach(function (ex) {
           var li = document.createElement("li");
           var src = byId[ex.id];
-          var b = document.createElement("b");
-          b.textContent = ex.id + " · ‘" + ex.keyword + "’";
-          li.appendChild(b);
+          li.appendChild(el("b", ex.id + " · ‘" + ex.keyword + "’"));
           li.appendChild(document.createTextNode(" — " + (src ? Mask.mask(src.text) : "(연습 문장을 찾지 못했어요)")));
           ul.appendChild(li);
         });
@@ -269,20 +282,35 @@
       body.appendChild(div);
     }
 
-    add("p", "낱말은 모두 data/practice.json의 연습 문장에서만 뽑았어요. 아래 예시는 낱말을 뽑은 문장입니다.");
-    add("p", "문장이 두 칸 이상에 해당하면 아래 순서에서 앞에 있는 칸을 고릅니다. 낱말이 하나도 없으면 마지막 칸을 고릅니다.");
-    add("h3", "칸 (우선순위 순)");
+    body.appendChild(el("p", "낱말은 모두 data/practice.json의 연습 문장에서만 뽑았어요. 아래 예시는 낱말을 뽑은 문장입니다. (AI는 이 낱말이 아니라 위 정의로 판단하고, AI를 쓰지 못할 때만 이 낱말 규칙을 써요.)"));
+    body.appendChild(el("h3", "칸 (앞 칸일수록 우선)"));
+    var nums = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧"];
     state.criteria.categories
       .slice().sort(function (a, b) { return a.order - b.order; })
       .forEach(function (c) {
-        block(c.order + ". " + c.name, c.definition, state.keywords.categories[c.name]);
+        row((nums[c.order - 1] || c.order + ".") + " " + c.name, null, c.definition, state.keywords.categories[c.name]);
       });
-    add("h3", "긴급도");
-    add("p", state.criteria.urgency_note);
-    add("p", state.keywords.urgency_rule);
-    state.criteria.urgency.forEach(function (u) {
-      block(u.name, u.definition, state.keywords.urgency[u.name]);
+    body.appendChild(el("h3", "긴급도"));
+    state.criteria.urgency.forEach(function (u, i) {
+      row(u.name, i, u.definition, state.keywords.urgency[u.name]);
     });
+
+    var soft = el("div", null, "lg-note");
+    soft.appendChild(el("p", "🤔 애매할 때", "lg-note-title"));
+    var ul1 = document.createElement("ul");
+    state.criteria.priority_rules.concat([state.criteria.urgency_note]).forEach(function (t) {
+      ul1.appendChild(el("li", t));
+    });
+    soft.appendChild(ul1);
+    body.appendChild(soft);
+    body.appendChild(el("p", state.keywords.urgency_rule));
+
+    var warn = el("div", null, "lg-note lg-warn");
+    warn.appendChild(el("p", "⚠️ 가장 중요한 오류", "lg-note-title"));
+    var ul2 = document.createElement("ul");
+    ul2.appendChild(el("li", "사업비·정산 문의를 다른 칸으로 잘못 배정하는 것"));
+    warn.appendChild(ul2);
+    body.appendChild(warn);
   }
 
   /* ---------- ② 채점 ---------- */
@@ -385,6 +413,11 @@
     return { cat: cat, urg: urg, both: both };
   }
 
+  function setBar(done, n) {
+    $("ai-progress").hidden = false;
+    $("ai-bar").style.width = Math.round((done / n) * 100) + "%";
+  }
+
   function initAiGrade() {
     $("ai-btn").addEventListener("click", function () {
       var btn = $("ai-btn"), dl = $("ai-dl"), status = $("ai-status");
@@ -411,6 +444,7 @@
         });
         var done = 0;
         status.textContent = "AI 채점 중… 0/" + n;
+        setBar(0, n);
 
         // 10개씩 차례로 보낸다 (30개면 세 번)
         var chain = Promise.resolve();
@@ -433,6 +467,7 @@
               }).then(function () {
                 done += batch.length;
                 status.textContent = "AI 채점 중… " + done + "/" + n;
+                setBar(done, n);
               });
             });
           })(rows.slice(s, s + BATCH));
@@ -551,6 +586,7 @@
       initClassify();
       initGrade();
       initAiGrade();
+      renderIntro();
       renderExamples();
       renderBasis();
     });
