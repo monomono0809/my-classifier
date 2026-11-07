@@ -224,10 +224,9 @@
     $("q").focus();
   }
 
-  // 머리말·안내 상자의 칸/긴급도 꼬리표는 criteria.json에서 만든다
+  // 안내 상자의 칸/긴급도 꼬리표는 criteria.json에서 만든다
   function renderIntro() {
     var c = state.criteria;
-    $("sub").textContent = c.owner + " · version " + c.version;
     function fill(id, names) {
       var ul = $(id);
       ul.textContent = "";
