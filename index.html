@@ -9,7 +9,7 @@
 <body>
   <main class="wrap">
     <header class="head">
-      <h1>창업지원 문의 데스크</h1>
+      <h1>참여기업의 문의 한 줄을 칸과 긴급도로 나눕니다</h1>
       <p id="sub" class="sub">참여기업의 문의 한 줄을 칸과 긴급도로 나눠 줘요</p>
       <span class="mode-badge" title="Gemini가 분류하고, AI가 실패하면 낱말 규칙으로 분류합니다.">AI 분류 · 실패 시 규칙</span>
     </header>
@@ -24,7 +24,7 @@
     <!-- ① 분류 -->
     <section id="panel-classify" role="tabpanel" aria-labelledby="tab-classify">
       <div class="intro">
-        <p class="intro-title">💡 이렇게 쓰는 도구예요</p>
+        <p class="intro-title">🧭 이렇게 쓰는 도구예요</p>
         <p class="intro-line">창업지원사업 참여기업의 문의 한 줄 → 어떤 칸인지 + 긴급도를 알려 줘요</p>
         <div class="tag-row">
           <span class="tag-label">칸</span>
@@ -34,11 +34,11 @@
           <span class="tag-label">긴급도</span>
           <ul class="tags" id="tags-urg"></ul>
         </div>
-        <p class="intro-title intro-sub"><label for="q">✏️ 어떤 문의가 들어왔나요?</label> <span class="paren">(누르면 입력칸에 들어가요)</span></p>
+        <p class="intro-title intro-sub"><label for="q">📝 어떤 문의가 들어왔나요?</label> <span class="paren">(누르면 입력칸에 들어가요)</span></p>
         <div class="examples" id="examples" aria-label="예시 문의"></div>
       </div>
 
-      <p class="notice">실제 이름 · 전화번호 · 사번은 넣지 마세요</p>
+      <p class="notice">실제 이름 등 개인정보는 넣지 마세요</p>
 
       <form id="form" autocomplete="off">
         <label for="q" class="label">문의 한 줄</label>
@@ -47,7 +47,7 @@
         <p id="hint" class="hint" role="status" aria-live="polite"></p>
         <div class="btn-row">
           <button id="go" type="submit" class="btn inline">문의 분류하기</button>
-          <button id="btn-sample" type="button" class="btn inline ghost-green">🎲 예시 문장 넣기</button>
+          <button id="btn-sample" type="button" class="btn inline ghost-green">🔀 예시 문장 넣기</button>
         </div>
       </form>
 
@@ -62,7 +62,7 @@
       <p class="note" id="mask-scope"></p>
 
       <details class="legend" id="basis">
-        <summary>📖 어떤 기준으로 나누나요?</summary>
+        <summary>🔎 어떤 기준으로 나누나요?</summary>
         <div id="basis-body"></div>
       </details>
     </section>
@@ -70,7 +70,7 @@
     <!-- ② 채점 -->
     <section id="panel-grade" role="tabpanel" aria-labelledby="tab-grade" hidden>
       <div class="intro">
-        <p class="intro-title">📊 이렇게 채점해요</p>
+        <p class="intro-title">🎯 이렇게 채점해요</p>
         <p class="intro-line">정답을 붙여 둔 30문장으로 규칙과 AI를 나란히 재요. 단추를 누를 때만 정답 파일을 열어요.</p>
       </div>
 
@@ -92,26 +92,26 @@
       </ul>
 
       <div class="box" id="ai-card" hidden>
-        <h2 class="box-title">📈 규칙 · AI 나란히</h2>
+        <h2 class="box-title">📋 규칙 · AI 나란히</h2>
         <table class="cmp">
           <caption class="sr-only">규칙과 AI 채점 결과 비교</caption>
           <thead><tr><th scope="col">지표</th><th scope="col">규칙</th><th scope="col">AI</th></tr></thead>
           <tbody id="cmp-body"></tbody>
         </table>
         <p id="ai-fail" class="hint warn" hidden></p>
-        <h2 class="box-title sub-title">📏 잰 조건</h2>
+        <h2 class="box-title sub-title">🧾 잰 조건</h2>
         <dl class="meta" id="ai-meta"></dl>
       </div>
-      <button id="ai-dl" type="button" class="btn secondary" disabled>⬇️ AI 채점 결과 내려받기</button>
+      <button id="ai-dl" type="button" class="btn secondary" disabled>📥 AI 채점 결과 내려받기</button>
 
       <div class="box" id="wrong-card" hidden>
-        <h2 class="box-title">❌ 틀린 문장 (규칙)</h2>
+        <h2 class="box-title">🧩 틀린 문장 (규칙)</h2>
         <p id="wrong-empty" class="hint" hidden>틀린 문장이 없어요.</p>
         <ul id="wrong" class="wrong-list"></ul>
       </div>
 
       <div class="box soft" id="meta-card" hidden>
-        <h2 class="box-title">📏 잰 조건 (규칙)</h2>
+        <h2 class="box-title">🧾 잰 조건 (규칙)</h2>
         <dl class="meta" id="meta"></dl>
       </div>
     </section>

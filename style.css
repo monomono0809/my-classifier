@@ -1,12 +1,12 @@
 :root {
-  --bg: #f7f5f3;
+  --bg: #eef2f9;
   --card: #ffffff;
   --text: #1c2330;
   --muted: #6b7384;
-  --line: #e4e0dc;
-  --accent: #1a7f45;
+  --line: #d9e0ee;
+  --accent: #1428a0;
   --accent-text: #ffffff;
-  --head: #14633a;
+  --head: #1428a0;
   --warn-bg: #fff1f0;
   --warn-line: #e0554b;
   --warn-text: #a3261c;
@@ -16,13 +16,13 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #14171d;
-    --card: #1b212b;
+    --bg: #11151f;
+    --card: #1a2130;
     --text: #e8ecf3;
     --muted: #9aa5b8;
-    --line: #2f3846;
-    --accent: #4ccf85;
-    --accent-text: #0d1220;
+    --line: #2c3750;
+    --accent: #8fa8ff;
+    --accent-text: #0b1233;
     --warn-bg: #3a1f1d;
     --warn-line: #e0675d;
     --warn-text: #ffb4ac;
@@ -88,8 +88,8 @@ input[type="text"]:focus { outline: 0; border: 2px solid var(--text); padding: 9
 .hint.warn { color: var(--warn-text); font-weight: 700; }
 
 /* 단추 */
-.btn { display: block; width: 100%; min-height: 46px; margin-top: 10px; font: inherit; font-weight: 700; color: var(--accent-text); background: var(--accent); border: 0; border-radius: 10px; cursor: pointer; transition: filter .15s, transform .1s, box-shadow .15s; }
-.btn:hover:not(:disabled) { filter: brightness(1.08); box-shadow: 0 2px 8px rgba(26, 127, 69, .3); }
+.btn { display: block; width: 100%; min-height: 46px; margin-top: 10px; font: inherit; font-weight: 700; color: var(--accent-text); background: var(--accent); border: 0; border-radius: 999px; cursor: pointer; transition: filter .15s, transform .1s, box-shadow .15s; }
+.btn:hover:not(:disabled) { filter: brightness(1.08); box-shadow: 0 2px 8px rgba(20, 40, 160, .3); }
 .btn:active:not(:disabled) { transform: translateY(1px) scale(.98); }
 .btn:disabled { opacity: .55; cursor: not-allowed; }
 .btn.secondary { color: var(--accent); background: transparent; border: 1px solid var(--accent); }

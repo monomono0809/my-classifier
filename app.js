@@ -207,7 +207,7 @@
       wrap.appendChild(b);
     });
 
-    // 🎲 예시 문장 넣기: 누를 때마다 연습 문장 하나를 입력창에 채운다 (분류는 하지 않는다)
+    // 🔀 예시 문장 넣기: 누를 때마다 연습 문장 하나를 입력창에 채운다 (분류는 하지 않는다)
     $("btn-sample").addEventListener("click", function () {
       var list = state.practice.filter(function (p) { return p.text && p.text.length <= 70; });
       var cur = $("q").value;
@@ -296,7 +296,7 @@
     });
 
     var soft = el("div", null, "lg-note");
-    soft.appendChild(el("p", "🤔 애매할 때", "lg-note-title"));
+    soft.appendChild(el("p", "💬 애매할 때", "lg-note-title"));
     var ul1 = document.createElement("ul");
     state.criteria.priority_rules.concat([state.criteria.urgency_note]).forEach(function (t) {
       ul1.appendChild(el("li", t));
@@ -306,7 +306,7 @@
     body.appendChild(el("p", state.keywords.urgency_rule));
 
     var warn = el("div", null, "lg-note lg-warn");
-    warn.appendChild(el("p", "⚠️ 가장 중요한 오류", "lg-note-title"));
+    warn.appendChild(el("p", "🚩 가장 중요한 오류", "lg-note-title"));
     var ul2 = document.createElement("ul");
     ul2.appendChild(el("li", "사업비·정산 문의를 다른 칸으로 잘못 배정하는 것"));
     warn.appendChild(ul2);
